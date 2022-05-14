@@ -17,8 +17,39 @@ function init () {
         })
     });
 
-    map.on('click', function (e) {
-        console.log(e);
-        console.log(e.coordinate);
+    // Base maps layers
+    const openStreetMapStandard = new ol.layer.Tile({
+      source: new ol.source.OSM(),
+      visible: false,
+      title: 'OSMStandard'
     })
+
+    const openStreetMapHumanitarian = new ol.layer.Tile({
+      source: new ol.source.OSM({
+        url: 'https://{a-c}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png'
+      }),
+      visible: false,
+      title: 'OSMHumanitarian'
+    });
+
+    const stamenTerrain = new ol.layer.Tile({
+      source: new ol.source.OSM({
+        url: 'https://stamen-tiles.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.jpg',
+        attributions: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://www.openstreetmap.org/copyright">ODbL</a>.'
+      }),
+      visible: true,
+      title: 'StamenTerrain'
+    });
+
+    // Layer Group
+    const baseLayerGroup = new ol.layer.Group({
+      layers: [
+        openStreetMapStandard,
+        openStreetMapHumanitarian,
+        stamenTerrain
+      ]
+    });
+
+    map.addLayer(baseLayerGroup);
+
 }
