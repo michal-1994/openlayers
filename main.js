@@ -69,13 +69,35 @@ function init () {
     }
 
     // Vector layers
+    const fillStyle = new ol.style.Fill({
+      color: [28, 219, 34, 0.75]
+    });
+
+    const strokeStyle = new ol.style.Stroke({
+      color: [0, 77, 255, 1],
+      width: 1.2
+    });
+
+    const circleStyle = new ol.style.Circle({
+      fill: new ol.style.Fill({
+        color: [255, 173, 0, 0.8]
+      }),
+      radius: 7,
+      stroke: strokeStyle
+    });
+
     const placesInCityGeoJSON = new ol.layer.VectorImage({
       source: new ol.source.Vector({
         url: './data/vector_data/placesInCity.geojson',
         format: new ol.format.GeoJSON()
       }),
       visible: true,
-      title: 'placesInCityGeoJSON'
+      title: 'placesInCityGeoJSON',
+      style: new ol.style.Style({
+        fill: fillStyle,
+        stroke: strokeStyle,
+        image: circleStyle
+      })
     });
 
     map.addLayer(placesInCityGeoJSON);
