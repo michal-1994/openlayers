@@ -68,4 +68,16 @@ function init () {
       });
     }
 
+    // Vector layers
+    const placesInCityGeoJSON = new ol.layer.VectorImage({
+      source: new ol.source.Vector({
+        url: './data/vector_data/placesInCity.geojson',
+        format: new ol.format.GeoJSON()
+      }),
+      visible: true,
+      title: 'placesInCityGeoJSON'
+    });
+
+    map.addLayer(placesInCityGeoJSON);
+
 }
