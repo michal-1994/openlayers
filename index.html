@@ -13,8 +13,28 @@
     <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.14.1/build/ol.js"></script>
 </head>
 <body>
-    <h2>My Map</h2>
-    <div id="map" class="map"></div>
+    <div class="grid-container">
+        <div class="grid-1">
+            <div class="sidebar">
+                <h2>Base Layers</h2>
+                <label for="OSMStandard">
+                    <input type="radio" name="baseLayer" value="OSMStandard" id="OSMStandard" checked="checked" />
+                    OSMStandard
+                </label>
+                <label for="OSMHumanitarian">
+                    <input type="radio" name="baseLayer" value="OSMHumanitarian" id="OSMHumanitarian" />
+                    OSMHumanitarian
+                </label>
+                <label for="StamenTerrain">
+                    <input type="radio" name="baseLayer" value="StamenTerrain" id="StamenTerrain" />
+                    StamenTerrain
+                </label>
+            </div>
+        </div>
+        <div class="grid-2">
+            <div id="map" class="map"></div>
+        </div>
+    </div>
 
     <script src="./main.js"></script>
 </body>

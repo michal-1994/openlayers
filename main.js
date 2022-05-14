@@ -37,7 +37,7 @@ function init () {
         url: 'https://stamen-tiles.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.jpg',
         attributions: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://www.openstreetmap.org/copyright">ODbL</a>.'
       }),
-      visible: true,
+      visible: false,
       title: 'StamenTerrain'
     });
 
@@ -51,5 +51,21 @@ function init () {
     });
 
     map.addLayer(baseLayerGroup);
+
+    // Layer switcher logic for basemaps
+    const baseLayerElements = document.querySelectorAll('.sidebar > label > input[type=radio]');
+
+    for (let baseLayerElement of baseLayerElements) {
+
+      baseLayerElement.addEventListener('change', function () {
+        let baseLayerElementValue = this.value;
+
+        baseLayerGroup.getLayers().forEach(function (element, index, array) {
+          let baseLayerTitle = element.get('title');
+
+          element.setVisible(baseLayerTitle === baseLayerElementValue);
+        })
+      });
+    }
 
 }
