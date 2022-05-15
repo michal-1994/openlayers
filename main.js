@@ -10,7 +10,7 @@ function init () {
         ],
         view: new ol.View({
           center: [2130866.237095212, 6495567.041331601],
-          zoom: 16,
+          zoom: 15,
           maxZoom: 20,
           minZoom: 10,
           rotation: 0
@@ -101,5 +101,34 @@ function init () {
     });
 
     map.addLayer(placesInCityGeoJSON);
+
+    // Vector feature popup logic
+    const overlayContainer = document.querySelector('.overlay-container');
+    const overlayLayer = new ol.Overlay({
+      element: overlayContainer
+    });
+    map.addOverlay(overlayLayer);
+
+    const overlayFeatureName = document.getElementById('feature-name');
+    const overlayFeatureInfo = document.getElementById('feature-info');
+
+    map.on('click', function (e) {
+      overlayLayer.setPosition(undefined);
+
+      map.forEachFeatureAtPixel(e.pixel, function (feature, layer) {
+        let clickedCoordinate = e.coordinate;
+        let clickedFeatureName = feature.get('name');
+        let clickedFeatureInfo = feature.get('info');
+
+        overlayLayer.setPosition(clickedCoordinate);
+        overlayFeatureName.innerHTML = clickedFeatureName;
+        overlayFeatureInfo.innerHTML = clickedFeatureInfo;
+      },
+      {
+        layerFilter: function (layerCandidate) {
+          return layerCandidate.get('title') === 'placesInCityGeoJSON';
+        }
+      });
+    });
 
 }

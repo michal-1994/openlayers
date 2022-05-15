@@ -32,3 +32,24 @@ body {
   flex-wrap: column;
   padding: 10px;
 }
+.overlay-container {
+  background-color: rgba(0, 0, 0, 0.75);
+  padding: 5px;
+  border-radius: 3px;
+  font-size: 11px;
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 150px;
+}
+.overlay-container:after {
+  position: absolute;
+  content: "";
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 10px solid rgba(0, 0, 0, 0.75);
+}
